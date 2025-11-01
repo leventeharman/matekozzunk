@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Matematikaóra általános iskolásoknak Nyíregyházán. Türelmes, egyéni tempó, felvételi előkészítés.">
+    <title>MatekOzzunk - Matematikaóra Nyíregyházán</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #2d5a9e 0%, #4a7dc4 100%);
+            color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #d4a857;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #d4a857;
+        }
+
+        .mobile-menu {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #e8ddb5 0%, #f5f0dc 100%);
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 3rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .hero-image {
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid #d4a857;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .hero-text {
+            flex: 1;
+            min-width: 300px;
+            text-align: left;
+        }
+
+        .hero h1 {
+            color: #2d5a9e;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: #555;
+            margin-bottom: 2rem;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: #d4a857;
+            color: white;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(212, 168, 87, 0.3);
+        }
+
+        .cta-button:hover {
+            background: #c49643;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(212, 168, 87, 0.4);
+        }
+
+        /* Section Styles */
+        section {
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h2 {
+            color: #2d5a9e;
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            position: relative;
+            padding-bottom: 1rem;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: #d4a857;
+        }
+
+        /* About Section */
+        #rolam {
+            background: white;
+        }
+
+        .about-content {
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #555;
+        }
+
+        .about-content p {
+            margin-bottom: 1rem;
+        }
+
+        .highlights {
+            background: #f5f0dc;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-top: 2rem;
+            border-left: 4px solid #d4a857;
+        }
+
+        .highlights ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .highlights li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .highlights li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #2d5a9e;
+            font-weight: bold;
+        }
+
+        /* Services Section */
+        #szolgaltatasok {
+            background: #f5f0dc;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .service-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .service-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .service-card h3 {
+            color: #2d5a9e;
+            margin-bottom: 1rem;
+        }
+
+        /* Pricing Section */
+        #arak {
+            background: white;
+        }
+
+        .pricing-box {
+            max-width: 500px;
+            margin: 2rem auto;
+            background: linear-gradient(135deg, #2d5a9e 0%, #4a7dc4 100%);
+            color: white;
+            padding: 3rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+
+        .price {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #d4a857;
+            margin: 1rem 0;
+        }
+
+        .price-subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .price-note {
+            margin-top: 1.5rem;
+            font-size: 0.95rem;
+            opacity: 0.8;
+        }
+
+        /* Contact Section */
+        #kapcsolat {
+            background: #f5f0dc;
+        }
+
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin-top: 2rem;
+        }
+
+        .contact-info {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .contact-item {
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .contact-item-icon {
+            font-size: 1.5rem;
+            color: #2d5a9e;
+        }
+
+        .contact-form {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #2d5a9e;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid #e8ddb5;
+            border-radius: 5px;
+            font-family: inherit;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #2d5a9e;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .submit-button {
+            background: #d4a857;
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            width: 100%;
+        }
+
+        .submit-button:hover {
+            background: #c49643;
+            transform: translateY(-2px);
+        }
+
+        /* Footer */
+        footer {
+            background: #2d5a9e;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: #2d5a9e;
+                flex-direction: column;
+                padding: 1rem;
+                gap: 0;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .nav-links a {
+                padding: 1rem;
+                border-bottom: 1px solid rgba(255,255,255,0.1);
+            }
+
+            .mobile-menu {
+                display: block;
+            }
+
+            .hero-content {
+                flex-direction: column;
+            }
+
+            .hero-text {
+                text-align: center;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav>
+            <a href="#" class="logo">MatekOzzunk</a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#rolam">Rólam</a></li>
+                <li><a href="#szolgaltatasok">Szolgáltatások</a></li>
+                <li><a href="#arak">Árak</a></li>
+                <li><a href="#kapcsolat">Kapcsolat</a></li>
+            </ul>
+            <button class="mobile-menu" id="mobileMenuBtn">☰</button>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <img src="https://via.placeholder.com/250" alt="Profilkép" class="hero-image">
+            <div class="hero-text">
+                <h1>Matematikaóra türelemmel, érthetően</h1>
+                <p>Segítek általános iskolás diákoknak a felzárkózásban, tudásmélyítésben és felvételi előkészítésben – Nyíregyházán.</p>
+                <a href="#kapcsolat" class="cta-button">Jelentkezem</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="rolam">
+        <h2>Rólam</h2>
+        <div class="about-content">
+            <p>Matematikaórák türelemmel, érthetően, a tanuló egyéni tempójához igazodva.</p>
+            
+            <p>Matematika szakos tanárként egyéni órákat vállalok általános iskolás diákok számára. Segítek pótolni a lemaradásokat, elmélyíteni a tudást, és felkészíteni középiskolai felvételire, matematikaversenyekre és kompetenciamérésre.</p>
+            
+            <p>Három gyermekes édesanyaként jól ismerem a korosztály sajátosságait, és könnyen megtalálom a közös hangot a gyerekekkel.</p>
+            
+            <p><strong>Fontos számomra, hogy a tanulás élmény legyen, ne stresszforrás.</strong> A célom, hogy a gyerekek magabiztosan, sikerélménnyel tanuljanak, és megértsék, hogy a matematika nem is olyan félelmetes.</p>
+            
+            <div class="highlights">
+                <strong>Amit kínálok:</strong>
+                <ul>
+                    <li>Matematika szakos tanári végzettség</li>
+                    <li>Egyéni tempóhoz igazodó oktatás</li>
+                    <li>Három gyermekes anya tapasztalata</li>
+                    <li>Türelem és empátia</li>
+                    <li>Személyes foglalkozások Nyíregyházán</li>
+                    <li><strong>Az első óra ingyenes!</strong></li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="szolgaltatasok">
+        <h2>Szolgáltatások</h2>
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon">📚</div>
+                <h3>Felső tagozat (5-8. osztály)</h3>
+                <p>Lemaradás pótlása, tudásmélyítés, hosszútávú felkészítés</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">🎒</div>
+                <h3>Alsó tagozat (1-4. osztály)</h3>
+                <p>Alapok lerakása, játékos matekozás, sikerélmény</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">🎓</div>
+                <h3>Felvételi előkészítés</h3>
+                <p>Célzott felkészítés középiskolai felvételire</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">🏆</div>
+                <h3>Versenyfelkészítés</h3>
+                <p>Tehetséggondozás, versenyek előkészítése</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="arak">
+        <h2>Árak</h2>
+        <div class="pricing-box">
+            <h3>Egyéni matematikaóra</h3>
+            <div class="price">5000 Ft</div>
+            <div class="price-subtitle">45 perc / alkalom</div>
+            <p class="price-note">Helyszín: Nyíregyháza<br>Első konzultáció ingyenes!</p>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="kapcsolat">
+        <h2>Kapcsolat</h2>
+        <div class="contact-container">
+            <div class="contact-info">
+                <h3 style="color: #2d5a9e; margin-bottom: 1.5rem;">Elérhetőségek</h3>
+                <div class="contact-item">
+                    <span class="contact-item-icon">📧</span>
+                    <div>
+                        <strong>Email:</strong><br>
+                        <a href="mailto:info@matekozzunk.hu" style="color: #2d5a9e;">info@matekozzunk.hu</a>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <span class="contact-item-icon">📱</span>
+                    <div>
+                        <strong>Telefon:</strong><br>
+                        <a href="tel:+36301234567" style="color: #2d5a9e;">+36 30 123 4567</a>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <span class="contact-item-icon">📍</span>
+                    <div>
+                        <strong>Helyszín:</strong><br>
+                        Nyíregyháza
+                    </div>
+                </div>
+            </div>
+
+            <div class="contact-form">
+                <h3 style="color: #2d5a9e; margin-bottom: 1.5rem;">Üzenet küldése</h3>
+                <form id="contactForm">
+                    <div class="form-group">
+                        <label for="name">Név *</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email *</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Telefonszám</label>
+                        <input type="tel" id="phone" name="phone">
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Üzenet *</label>
+                        <textarea id="message" name="message" required></textarea>
+                    </div>
+                    <button type="submit" class="submit-button">Üzenet küldése</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 MatekOzzunk. Minden jog fenntartva.</p>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navLinks = document.getElementById('navLinks');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                    navLinks.classList.remove('active');
+                }
+            });
+        });
+
+        // Contact form handler
+        const contactForm = document.getElementById('contactForm');
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // Itt később majd beállítjuk az email küldést
+            alert('Köszönjük az üzenetet! Hamarosan válaszolunk.');
+            contactForm.reset();
+        });
+    </script>
+</body>
+</html>
