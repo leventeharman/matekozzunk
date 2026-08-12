@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const observerOptions = {
         root: null,
         rootMargin: '0px',
-        threshold: 0.15 // Akkor töltődik be, amikor az elem 15%-a láthatóvá válik
+        threshold: 0.1 
     };
 
     const observer = new IntersectionObserver((entries, observer) => {
@@ -38,3 +38,26 @@ document.addEventListener('DOMContentLoaded', () => {
     fadeElements.forEach(el => observer.observe(el));
     
 });
+// 3. Cookie Banner kezelése
+    const cookieBanner = document.getElementById('cookie-banner');
+    const acceptCookiesBtn = document.getElementById('accept-cookies');
+
+    // Ellenőrizzük, hogy elfogadta-e már korábban
+    if (!localStorage.getItem('cookiesAccepted')) {
+        cookieBanner.style.display = 'block';
+    }
+
+    if (acceptCookiesBtn) {
+        acceptCookiesBtn.addEventListener('click', () => {
+            localStorage.setItem('cookiesAccepted', 'true');
+            cookieBanner.style.display = 'none';
+            
+            // Itt elvileg dinamikusan is be lehetne tölteni a Google Analytics-et, 
+            // de jelenleg a gtag inicializálását engedélyezzük.
+            if (typeof gtag === 'function') {
+                gtag('consent', 'update', {
+                    'analytics_storage': 'granted'
+                });
+            }
+        });
+    }

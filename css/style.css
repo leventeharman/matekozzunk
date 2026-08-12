@@ -24,7 +24,6 @@
 }
 
 html {
-    /* Natív smooth scroll és horgonypont eltolás a fix menü miatt */
     scroll-behavior: smooth;
     scroll-padding-top: var(--header-height);
 }
@@ -37,7 +36,6 @@ body {
     overflow-x: hidden;
 }
 
-/* Fókusz menedzsment (A11y) */
 *:focus-visible {
     outline: 2px dashed var(--accent-color);
     outline-offset: 4px;
@@ -134,7 +132,7 @@ nav {
 
 .hero h1 {
     color: var(--primary-color);
-    font-size: clamp(2rem, 4vw, 2.5rem);
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
     margin-bottom: 1.2rem;
     line-height: 1.2;
 }
@@ -317,7 +315,7 @@ h2::after {
 /* Vélemények */
 .testimonial-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 2.5rem;
 }
 
@@ -373,13 +371,6 @@ h2::after {
     padding: 3rem;
     border-radius: var(--radius-lg);
     box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-}
-
-.pricing-list h3 {
-    color: var(--primary-color);
-    margin-bottom: 2rem;
-    text-align: center;
-    font-size: 1.8rem;
 }
 
 .price-item {
@@ -482,14 +473,14 @@ summary {
     color: var(--primary-color);
     padding: 1.2rem;
     cursor: pointer;
-    list-style: none; /* Modern browsers */
+    list-style: none;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
 summary::-webkit-details-marker {
-    display: none; /* Safari */
+    display: none;
 }
 
 summary::after {
@@ -639,7 +630,7 @@ footer {
     transform: translateY(0);
 }
 
-/* Responsive Design */
+/* Responsive Design (Mobil & Tablet Optimalizáció) */
 @media (max-width: 860px) {
     .contact-container {
         grid-template-columns: 1fr;
@@ -651,35 +642,20 @@ footer {
         --header-height: 60px;
     }
     
-    .nav-links {
-        display: flex;
-        position: absolute;
-        top: 100%;
-        left: 0;
-        right: 0;
-        background: var(--primary-color);
-        flex-direction: column;
-        padding: 0;
-        gap: 0;
-        clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
-        transition: clip-path 0.3s ease-in-out;
-        box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    /* Kevesebb térköz a mobilképernyőkön az átláthatóságért */
+    section {
+        padding: 3.5rem 1.5rem;
     }
 
-    .nav-links.active {
-        clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+    h2 {
+        font-size: 1.8rem;
+        margin-bottom: 2rem;
     }
-
-    .nav-links a {
-        padding: 1.2rem 2rem;
-        display: block;
-        border-bottom: 1px solid rgba(255,255,255,0.05);
+    
+    .course-card, .pricing-list, .pricing-conditions, .contact-info, .contact-form {
+        padding: 1.5rem;
     }
-
-    .mobile-menu {
-        display: block;
-    }
-
+    
     .hero-content {
         flex-direction: column;
         gap: 2rem;
@@ -697,5 +673,40 @@ footer {
     
     .price-amount {
         text-align: left;
+    }
+
+    /* Megbízhatóbb, letisztult mobilmenü */
+    .nav-links {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        flex-direction: column;
+        background: var(--primary-color);
+        padding: 0;
+        gap: 0;
+        box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        
+        /* Animáció stabilitásához */
+        visibility: hidden;
+        opacity: 0;
+        transform: translateY(-10px);
+        transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
+    }
+
+    .nav-links.active {
+        visibility: visible;
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .nav-links a {
+        padding: 1.2rem 2rem;
+        display: block;
+        border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .mobile-menu {
+        display: block;
     }
 }
