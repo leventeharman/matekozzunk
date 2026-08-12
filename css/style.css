@@ -228,9 +228,45 @@ h2::after {
     font-weight: bold;
 }
 
-/* Óratípusok */
+/* Szolgáltatások (Eredeti ikonos) */
+#szolgaltatasok {
+    background: var(--bg-light);
+}
+
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+}
+
+.service-card {
+    background: var(--white);
+    padding: 2rem;
+    border-radius: var(--radius-md);
+    text-align: center;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+    transition: transform 0.3s;
+    border: 1px solid rgba(0,0,0,0.02);
+}
+
+.service-card:hover {
+    transform: translateY(-5px);
+}
+
+.service-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.service-card h3 {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+}
+
+/* Óratípusok (Kibomló részletek) */
 #oratipusok {
-    background-color: var(--bg-light);
+    background-color: var(--white);
     max-width: 100%;
 }
 
@@ -240,21 +276,19 @@ h2::after {
 }
 
 .course-card {
-    background: var(--white);
+    background: var(--bg-light);
     padding: 2.5rem;
     border-radius: var(--radius-lg);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-    margin-bottom: 2.5rem;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.03);
+    margin-bottom: 2rem;
     transition: var(--transition);
-    border: 1px solid rgba(0,0,0,0.02);
+    border: 1px solid rgba(0,0,0,0.05);
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
 }
 
-.course-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 15px 40px rgba(0,0,0,0.08);
-}
-
-.course-card h3 {
+.course-card-header h3 {
     color: var(--primary-color);
     font-size: 1.4rem;
     margin-bottom: 1.5rem;
@@ -262,26 +296,43 @@ h2::after {
     padding-bottom: 1rem;
 }
 
-.course-card h4 {
+.course-card-header p {
+    color: var(--text-muted);
+    margin-bottom: 0.5rem;
+}
+
+.expand-indicator {
+    display: block;
+    text-align: center;
     color: var(--accent-color);
-    margin-top: 2rem;
+    font-size: 0.9rem;
+    font-weight: bold;
+    margin-top: 1rem;
+    transition: opacity 0.3s ease;
+}
+
+.course-card-details {
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: max-height 0.6s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.5s ease, margin-top 0.3s ease;
+}
+
+.course-card-details h4 {
+    color: var(--accent-color);
+    margin-top: 1.5rem;
     margin-bottom: 1rem;
     font-size: 1.1rem;
 }
 
-.course-card ul {
+.course-card-details ul {
     padding-left: 1.5rem;
     margin-bottom: 1.5rem;
     color: var(--text-muted);
 }
 
-.course-card li {
+.course-card-details li {
     margin-bottom: 0.5rem;
-}
-
-.course-card p {
-    color: var(--text-muted);
-    margin-bottom: 1rem;
 }
 
 .course-price {
@@ -290,26 +341,43 @@ h2::after {
     margin-top: 1.5rem;
 }
 
-.contact-prompt {
-    background: var(--primary-color);
-    color: var(--white);
-    text-align: center;
-    padding: 3rem 2rem;
-    border-radius: var(--radius-lg);
-    margin-top: 4rem;
-    box-shadow: 0 10px 30px rgba(45, 90, 158, 0.2);
+/* Hover asztalin, click/tap mobilon */
+@media (hover: hover) {
+    .course-card:hover {
+        box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+        background: var(--white);
+    }
+    
+    .course-card:hover .course-card-details {
+        max-height: 1500px; /* Bármilyen nagy szám, ami biztosan elég */
+        opacity: 1;
+        margin-top: 1.5rem;
+    }
+
+    .course-card:hover .expand-indicator {
+        opacity: 0;
+        max-height: 0;
+        margin: 0;
+        overflow: hidden;
+    }
 }
 
-.contact-prompt a {
-    color: var(--accent-color);
-    text-decoration: none;
-    font-weight: bold;
-    border-bottom: 2px solid transparent;
-    transition: var(--transition);
+.course-card.expanded {
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    background: var(--white);
 }
 
-.contact-prompt a:hover {
-    border-bottom-color: var(--accent-color);
+.course-card.expanded .course-card-details {
+    max-height: 1500px;
+    opacity: 1;
+    margin-top: 1.5rem;
+}
+
+.course-card.expanded .expand-indicator {
+    opacity: 0;
+    max-height: 0;
+    margin: 0;
+    overflow: hidden;
 }
 
 /* Vélemények */
@@ -610,7 +678,39 @@ details p {
     box-shadow: 0 6px 20px rgba(212, 168, 87, 0.4);
 }
 
-/* Footer */
+/* Footer & Cookie Banner */
+#cookie-banner {
+    display: none;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    box-sizing: border-box; /* Ez oldja meg a mobilos kicsúszást! */
+    background: var(--bg-light);
+    padding: 1.5rem;
+    padding-bottom: calc(1.5rem + env(safe-area-inset-bottom, 0px));
+    box-shadow: 0 -5px 20px rgba(0,0,0,0.15);
+    z-index: 9999;
+    text-align: center;
+    border-top: 3px solid var(--accent-color);
+}
+
+#cookie-banner p {
+    margin-bottom: 1rem; 
+    color: var(--text-muted); 
+    font-size: 0.95rem;
+}
+
+#cookie-banner a {
+    color: var(--primary-color); 
+    text-decoration: underline;
+}
+
+#cookie-banner button {
+    padding: 0.5rem 2rem; 
+    font-size: 1rem;
+}
+
 footer {
     background: var(--primary-color);
     color: var(--white);
@@ -642,7 +742,6 @@ footer {
         --header-height: 60px;
     }
     
-    /* Kevesebb térköz a mobilképernyőkön az átláthatóságért */
     section {
         padding: 3.5rem 1.5rem;
     }
@@ -675,7 +774,7 @@ footer {
         text-align: left;
     }
 
-    /* Megbízhatóbb, letisztult mobilmenü */
+    /* Mobilmenü animáció */
     .nav-links {
         position: absolute;
         top: 100%;
@@ -687,7 +786,6 @@ footer {
         gap: 0;
         box-shadow: 0 10px 20px rgba(0,0,0,0.1);
         
-        /* Animáció stabilitásához */
         visibility: hidden;
         opacity: 0;
         transform: translateY(-10px);

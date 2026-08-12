@@ -21,6 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const observerOptions = {
         root: null,
         rootMargin: '0px',
+        // Mobilon a hosszú szekciók miatt 10%-os láthatóság már elég a triggerhez
         threshold: 0.1 
     };
 
@@ -36,9 +37,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const fadeElements = document.querySelectorAll('.fade-in');
     fadeElements.forEach(el => observer.observe(el));
-    
-});
-// 3. Cookie Banner kezelése
+
+
+    // 3. Óratípusok kártyák "kibomló" logikája (érintőképernyőkhöz)
+    const courseCards = document.querySelectorAll('.course-card');
+    courseCards.forEach(card => {
+        card.addEventListener('click', () => {
+            // Mobilon (vagy ha nem támogatott a hover), klikkre nyílik le
+            if (window.matchMedia("(hover: none)").matches || window.innerWidth <= 768) {
+                card.classList.toggle('expanded');
+            }
+        });
+    });
+
+    // 4. Cookie Banner kezelése
     const cookieBanner = document.getElementById('cookie-banner');
     const acceptCookiesBtn = document.getElementById('accept-cookies');
 
@@ -61,3 +73,5 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
+    
+});
